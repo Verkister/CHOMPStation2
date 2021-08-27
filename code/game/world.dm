@@ -1,7 +1,7 @@
 #define RECOMMENDED_VERSION 501
 /world/New()
 	world_startup_time = world.timeofday
-	rollover_safety_date = world.realtime - world.timeofday // 00:00 today (ish, since floating point error with world.realtime) of today
+	rollover_safety_date = text2num(time2text(world_startup_time, "DD"))
 	to_world_log("Map Loading Complete")
 	//logs
 	//VOREStation Edit Start
@@ -113,7 +113,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = strip_improper(using_map.full_name) //Done to remove the non-UTF-8 text macros 
+		s["map"] = strip_improper(using_map.full_name) //Done to remove the non-UTF-8 text macros
 
 		if(input["status"] == "2") // Shiny new hip status.
 			var/active = 0
@@ -544,7 +544,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	features += config.abandon_allowed ? "respawn" : "no respawn"
 
 	features += config.persistence_disabled ? "persistence disabled" : "persistence enabled"
-	
+
 	features += config.persistence_ignore_mapload ? "persistence mapload disabled" : "persistence mapload enabled"
 
 	if (config && config.allow_vote_mode)
@@ -599,7 +599,7 @@ var/failed_old_db_connections = 0
 		if(num_tries==5)
 			log_admin("ERROR TRYING TO CLEAR erro_attacklog")
 		qdel(query_truncate2)
-	else 
+	else
 		to_world_log("Feedback database connection failed.")
 	//CHOMPEdit End
 	return 1
@@ -694,7 +694,7 @@ proc/establish_old_db_connection()
 
 	if(dbcon_old?.IsConnected())
 		results += "WARNING: dbcon_old is connected, not touching it, but is this intentional?"
-	
+
 	if(!config.sql_enabled)
 		results += "stopping because config.sql_enabled = false"
 	else
@@ -703,7 +703,7 @@ proc/establish_old_db_connection()
 			results += "SUCCESS: set up a connection successfully with setup_database_connection()"
 		else
 			results += "FAIL: failed to connect to the database with setup_database_connection()"
-		
+
 	results += "-- DB Reset End --"
 	to_world_log(results.Join("\n"))
 */
@@ -713,11 +713,11 @@ proc/establish_old_db_connection()
 	if(!istype(GLOB.players_by_zlevel, /list))
 		GLOB.players_by_zlevel = new /list(world.maxz, 0)
 		GLOB.living_players_by_zlevel = new /list(world.maxz, 0)
-	
+
 	while(GLOB.players_by_zlevel.len < world.maxz)
 		GLOB.players_by_zlevel.len++
 		GLOB.players_by_zlevel[GLOB.players_by_zlevel.len] = list()
-		
+
 		GLOB.living_players_by_zlevel.len++
 		GLOB.living_players_by_zlevel[GLOB.living_players_by_zlevel.len] = list()
 
@@ -759,10 +759,10 @@ var/global/game_id = null
 	game_id = ""
 
 	var/list/c = list(
-		"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
-		"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
-		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
+		"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+		"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
 		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 		)
 	var/l = c.len

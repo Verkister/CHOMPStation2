@@ -63,7 +63,7 @@ var/next_station_date_change = 1 DAY
 		next_station_date_change += 1 DAY
 		update_time = TRUE
 	if(!station_date || update_time)
-		station_date = num2text((text2num(time2text(REALTIMEOFDAY, "YYYY"))+544)) + "-" + time2text(REALTIMEOFDAY, "MM-DD") //CHOMP EDIT
+		station_date = num2text((text2num(time2text(station_time_in_ds, "YYYY"))+544)) + "-" + time2text(station_time_in_ds, "MM-DD") //CHOMP EDIT
 	return station_date
 
 //ISO 8601
@@ -127,16 +127,17 @@ GLOBAL_VAR_INIT(round_start_time, 0)
 /var/rollover_safety_date = 0 // set in world/New to the server startup day-of-month
 /proc/update_midnight_rollover()
 	// Day has wrapped (world.timeofday drops to 0 at the start of each real day)
-	if (world.timeofday < rollovercheck_last_timeofday)
+	if(world.timeofday < rollovercheck_last_timeofday)
 		// If the day started/last wrap was < 12 hours ago, this is spurious
-		if(rollover_safety_date < world.realtime - (12 HOURS))
+		var/curday = text2num(time2text(world.realtime, "DD"))
+		if(curday - rollover_safety_date >= 1)
+			rollover_safety_date = curday
 			midnight_rollovers++
-			rollover_safety_date = world.realtime
 		else
-			warning("Time rollover error: world.timeofday decreased from previous check, but the day or last rollover is less than 12 hours old. System clock?")
+			warning("Time rollover error: world.timeofday decreased from previous check, but date remained the same. System clock?")
 	rollovercheck_last_timeofday = world.timeofday
 	return midnight_rollovers
-  
+
 //Increases delay as the server gets more overloaded,
 //as sleeps aren't cheap and sleeping only to wake up and sleep again is wasteful
 #define DELTA_CALC max(((max(TICK_USAGE, world.cpu) / 100) * max(Master.sleep_delta-1,1)), 1)
