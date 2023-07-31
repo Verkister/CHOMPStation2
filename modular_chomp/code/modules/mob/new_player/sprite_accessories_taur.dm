@@ -32,6 +32,21 @@
 	extra_overlay = "fatwolfalt_markings1"
 	extra_overlay2 = "fatwolfalt_markings2"
 	icon_sprite_tag = "wolf"
+	can_loaf = TRUE
+	icon_loaf = 'icons/mob/vore/taurs_ch_loaf.dmi'
+	loaf_offset = 4
+
+/datum/sprite_accessory/tail/taur/ch/wolf/bellysynthwolf_wag
+	name = "SynthWolf dual-color (Taur, Belly vwag)"
+	icon_state = "synthwolf_s"
+	extra_overlay = "synthwolf_markings"
+	extra_overlay2 = "synthwolf_glow"
+	ani_state = "synthwolf_belly_s"
+	extra_overlay_w = "synthwolf_markings"
+	extra_overlay2_w = "synthwolf_glow"
+	can_loaf = TRUE
+	icon_loaf = 'icons/mob/vore/taurs_ch_loaf.dmi'
+	loaf_offset = 4
 
 /datum/sprite_accessory/tail/taur/ch/naga/alt
 	name = "Naga alt (Taur)"
@@ -74,6 +89,13 @@
 	name = "Synthetic Naga dual-color (Taur)"
 	icon_state = "synthnaga"
 	extra_overlay = "synthnaga_belly"
+
+/datum/sprite_accessory/tail/taur/ch/naga/bellynaga
+	name = "SynthWolf dual-color (Taur, Belly vwag)"
+	icon_state = "naga_s"
+	extra_overlay = "naga_markings"
+	ani_state = "naga_belly_s"
+	extra_overlay_w = "naga_markings"
 
 /datum/sprite_accessory/tail/taur/ch/horse/scoli
 	name = "Scolipede (Taur)"
@@ -154,3 +176,24 @@
 /datum/sprite_accessory/tail/taur/ch/kitsune
 	name = "Kitsune (Taur)"
 	icon_state = "kitsune"
+
+/datum/sprite_accessory/tail/taur/ch/otie_belly
+	name = "Otie (Taur, Belly vwag)"
+	icon_state = "otie_s"
+	extra_overlay = "otie_belly_markings"
+	extra_overlay2 = "otie_markings_2"
+	suit_sprites = 'icons/mob/taursuits_otie_vr.dmi'
+	icon_sprite_tag = "otie"
+	can_loaf = TRUE
+	icon_loaf = 'icons/mob/vore/taurs_ch_loaf.dmi'
+	loaf_offset = 5
+
+/datum/sprite_accessory/tail/taur/drake //Enabling on request, no suit compatibility but then again see 2 above.
+	name = "Drake (Taur)"
+	icon_state = "drake_s"
+	extra_overlay = "drake_markings"
+	suit_sprites = 'icons/mob/taursuits_drake_ch.dmi'
+	icon_sprite_tag = "drake"
+	can_loaf = TRUE
+	icon_loaf = 'icons/mob/vore/taurs_ch_loaf.dmi'
+	loaf_offset = 6
