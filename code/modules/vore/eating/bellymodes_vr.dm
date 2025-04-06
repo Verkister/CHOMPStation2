@@ -289,7 +289,7 @@
 			M.digestion_in_progress = TRUE
 			if(M.health > -36 || (ishuman(M) && M.health > -136))
 				to_chat(M, span_vnotice("(Your predator has enabled gradual body digestion. Stick around for a second round of churning to reach the true finisher.)"))
-		if(M.health < M.maxHealth * -1) //Siplemobs etc
+		if(M.health <= M.maxHealth * -1) //Simplemobs etc //CHOMPEdit
 			if(ishuman(M))
 				if(M.health < (M.maxHealth * -1) -100) //Spacemans can go much deeper. Jank but maxHealth*-2 doesn't work with flat standard -100hp death threshold.
 					if(slow_brutal)
